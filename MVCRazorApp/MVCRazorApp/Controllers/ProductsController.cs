@@ -39,7 +39,7 @@ namespace MVCRazorApp.Controllers
 			return View(product);
 		}
 
-		// GET: /Movies/Create 
+		// GET: /Products/Create 
 		public ActionResult Create()
 		{
 			return View();
@@ -50,14 +50,13 @@ namespace MVCRazorApp.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598. 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Create(string Name, int Price, string Type, string Description)
-		// "ID,Name,Type,Description,Price"
+		public ActionResult Create(string Name, int Price, string Type, string Description, HttpPostedFileBase Img)
 		{
 			Product product = new Product();
 			if (ModelState.IsValid)
 			{
 				byte[] imgByte = null;
-				/*
+
 				if (Img != null)
 				{
 					using (var binaryReader = new BinaryReader(Img.InputStream))
@@ -65,7 +64,7 @@ namespace MVCRazorApp.Controllers
 						imgByte = binaryReader.ReadBytes(Img.ContentLength);
 					}
 					       
-				}*/
+				}
 
 				product.Name = Name;
 				product.Type = Type;
@@ -106,10 +105,30 @@ namespace MVCRazorApp.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598. 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit([Bind(Include = "Name,Type,Description,Price")] Product product)
+		public ActionResult Edit(int ID, string Name, string Type, string Description, decimal Price, HttpPostedFileBase Img)
 		{
+			Product product = db.Products.Find(ID);
+
+
+
 			if (ModelState.IsValid)
 			{
+				product.Name = Name;
+				product.Type = Type;
+				product.Description = Description;
+				product.Price = Price;
+
+				if (Img != null)
+				{
+					byte[] imgByte;
+					using (var binaryReader = new BinaryReader(Img.InputStream))
+					{
+						imgByte = binaryReader.ReadBytes(Img.ContentLength);
+					}
+					product.ProductImg = imgByte;
+
+				}
+
 				db.Entry(product).State = EntityState.Modified;
 				db.SaveChanges();
 				return RedirectToAction("Index");
