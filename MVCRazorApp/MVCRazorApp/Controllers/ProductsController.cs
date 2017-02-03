@@ -50,9 +50,8 @@ namespace MVCRazorApp.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598. 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Create(string Name, int Price, string Type, string Description, HttpPostedFileBase Img)
+		public ActionResult Create([Bind(Include="Name,Type,Description,Price")] Product product, HttpPostedFileBase Img)
 		{
-			Product product = new Product();
 			if (ModelState.IsValid)
 			{
 				byte[] imgByte = null;
@@ -63,20 +62,13 @@ namespace MVCRazorApp.Controllers
 					{
 						imgByte = binaryReader.ReadBytes(Img.ContentLength);
 					}
+					product.ProductImg = imgByte;
 					       
 				}
 
-				product.Name = Name;
-				product.Type = Type;
-				product.Description = Description;
-				product.Price = Price;
-				product.ProductImg = imgByte;
+
 
 				db.Products.Add(product);
-
-				// Test debug on Mac
-
-
 
 				db.SaveChanges();
 				return RedirectToAction("Index");
