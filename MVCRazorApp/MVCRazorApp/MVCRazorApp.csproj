@@ -95,6 +95,7 @@
     <Reference Include="Wrapper.ADO">
       <HintPath>..\packages\Wrapper.ADO.1.0.0.5\lib\Wrapper.ADO.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
@@ -102,6 +103,7 @@
     <Folder Include="Scripts\" />
     <Folder Include="Views\Products\" />
     <Folder Include="Notes\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -216,5 +218,8 @@
     </None>
     <None Include="Notes\Notes.txt" />
     <None Include="Scripts\jquery-1.12.4.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\emptyImg.jpeg" />
   </ItemGroup>
 </Project>

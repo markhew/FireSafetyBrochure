@@ -21,3 +21,4 @@
 /Users/markhew/FireSafetyBrochure/MVCRazorApp/MVCRazorApp/bin/System.Web.Optimization.dll
 /Users/markhew/FireSafetyBrochure/MVCRazorApp/MVCRazorApp/bin/Extensions.NET.dll
 /Users/markhew/FireSafetyBrochure/MVCRazorApp/MVCRazorApp/bin/Wrapper.ADO.dll
+/Users/markhew/FireSafetyBrochure/MVCRazorApp/MVCRazorApp/obj/Debug/MVCRazorApp.Images.emptyImg.jpeg

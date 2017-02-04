@@ -22,6 +22,13 @@ namespace MVCRazorApp
 				"{controller}/{action}/{id}",
 				new { controller = "Home", action = "Index", id = "" }
 			);
+			/*
+			routes.MapRoute(
+				"ImageGen",
+				"{controller}/{action}/{id}",
+				new { controller = "Products", action = "getImg", id=""}
+			);*/
+			      
 
 		}
 

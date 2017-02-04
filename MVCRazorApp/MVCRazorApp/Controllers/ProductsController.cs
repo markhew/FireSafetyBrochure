@@ -10,6 +10,7 @@ using System.Net;
 
 using MVCRazorApp.Models;
 using System.IO;
+using System.Drawing;
 
 namespace MVCRazorApp.Controllers
 {
@@ -54,16 +55,20 @@ namespace MVCRazorApp.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				byte[] imgByte = null;
 
 				if (Img != null)
 				{
+					byte[] imgByte = null;
+
 					using (var binaryReader = new BinaryReader(Img.InputStream))
 					{
 						imgByte = binaryReader.ReadBytes(Img.ContentLength);
 					}
 					product.ProductImg = imgByte;
-					       
+
+				}
+				else {
+					product.ProductImg = UseDefaultImage();
 				}
 
 
@@ -152,6 +157,31 @@ namespace MVCRazorApp.Controllers
 			db.Products.Remove(product);
 			db.SaveChanges();
 			return RedirectToAction("Index");
+		}
+
+		public FileContentResult getImg(int id)
+		{
+			byte[] byteArray = db.Products.Find(id).ProductImg;
+			return byteArray != null
+				? new FileContentResult(byteArray, "image/jpeg")
+				: null;
+		}
+
+		private byte[] UseDefaultImage()
+		{
+			int width = 800;
+			int height = 800;
+
+			Bitmap img = new Bitmap(width, height);
+			using (Graphics graph = Graphics.FromImage(img))
+			{
+				Rectangle ImageSize = new Rectangle(0, 0, width, height);
+				graph.FillRectangle(Brushes.White, ImageSize);
+			}
+
+			ImageConverter converter = new ImageConverter();
+			return (byte[])converter.ConvertTo(img, typeof(byte[]));
+
 		}
 
 		protected override void Dispose(bool disposing)
