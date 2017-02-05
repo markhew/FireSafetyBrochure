@@ -16,7 +16,10 @@
         <hr /> 
         @Html.ValidationSummary(true) 
         @Html.HiddenFor(model => model.ID) 
- 
+
+		<img src="@Url.Action("getImg", "Products", "new{ id = model.ID}")" />
+
+	
         <div class="form-group"> 
             @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" }) 
             <div class="col-md-10"> 
@@ -24,6 +27,8 @@
                 @Html.ValidationMessageFor(model => model.Name) 
             </div> 
         </div> 
+
+
  
         <div class="form-group"> 
             @Html.LabelFor(model => model.Type, new { @class = "control-label col-md-2" }) 
@@ -36,7 +41,7 @@
         <div class="form-group"> 
             @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" }) 
             <div class="col-md-10"> 
-                @Html.EditorFor(model => model.Description) 
+                @Html.TextAreaFor(model=>model.Description, new{@class="form-control"})
                 @Html.ValidationMessageFor(model => model.Description) 
             </div> 
         </div> 
@@ -52,9 +57,7 @@
 		<div class="form-group"> 
             @Html.LabelFor(model => model.ProductImg, new { @class = "control-label col-md-2" }) 
             <div class="col-md-10"> 
-				<img src="@Html.Action("getImg", "Products", "new{ id = model.ID}")" alt="Image"/>
-                <input type="file" id="Img" name="Img"/>
-			
+				<input type="file" name="ProductImg" id="ProductImg" accept="image/*"/>			
                 @Html.ValidationMessageFor(model => model.ProductImg)             
 			</div> 
         </div>

@@ -19,7 +19,7 @@
         <div class="form-group"> 
             @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" }) 
             <div class="col-md-10"> 
-                <input type="text" id="Name" name="Name"/>
+                @Html.EditorFor(model => model.Name) 
                 @Html.ValidationMessageFor(model => model.Name) 
             </div> 
         </div> 
@@ -28,7 +28,7 @@
 		<div class="form-group"> 
             @Html.LabelFor(model => model.Type, new { @class = "control-label col-md-2" }) 
             <div class="col-md-10"> 
-                <input type="text" id="Type" name="Type"/>
+            	@Html.EditorFor(model=>model.Type)
                 @Html.ValidationMessageFor(model => model.Type) 
             </div> 
         </div> 
@@ -36,24 +36,23 @@
  		<div class="form-group"> 
             @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-2", onkeydown="onlyDecimal(event,this)" }) 
             <div class="col-md-10"> 
-                <input type="text" id="Price" name="Price"/>
-                @Html.ValidationMessageFor(model => model.Price) 
+            	@Html.EditorFor(model=>model.Price)
+				@Html.ValidationMessageFor(model => model.Price) 
             </div> 
         </div> 
 	
         <div class="form-group"> 
             @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" }) 
             <div class="col-md-10"> 
-                <textarea id="Description" name="Description" class="form-control"></textarea>
-                @Html.ValidationMessageFor(model => model.Description) 
+                @Html.TextAreaFor(model=>model.Description, new{@class="form-control"})
+				@Html.ValidationMessageFor(model => model.Description) 
             </div> 
         </div>
 
 		<div class="form-group"> 
             @Html.LabelFor(model => model.ProductImg, new { @class = "control-label col-md-2"}) 
-            <div class="col-md-10"> 
-                <input type="file" id="Img" name="Img" accept="image/*" />
-                @Html.ValidationMessageFor(model => model.ProductImg)             
+            <div class="col-md-10"> 				
+				<input type="file" name="ProductImg" id="ProductImg" accept="image/*"/>
 			</div> 
         </div>
  

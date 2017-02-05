@@ -51,18 +51,18 @@ namespace MVCRazorApp.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598. 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Create([Bind(Include="Name,Type,Description,Price")] Product product, HttpPostedFileBase Img)
+		public ActionResult Create([Bind(Include="Name,Type,Description,Price")] Product product, HttpPostedFileBase ProductImg)
 		{
 			if (ModelState.IsValid)
 			{
 
-				if (Img != null)
+				if (ProductImg != null)
 				{
 					byte[] imgByte = null;
 
-					using (var binaryReader = new BinaryReader(Img.InputStream))
+					using (var binaryReader = new BinaryReader(ProductImg.InputStream))
 					{
-						imgByte = binaryReader.ReadBytes(Img.ContentLength);
+						imgByte = binaryReader.ReadBytes(ProductImg.ContentLength);
 					}
 					product.ProductImg = imgByte;
 
@@ -102,7 +102,7 @@ namespace MVCRazorApp.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598. 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit(int ID, string Name, string Type, string Description, decimal Price, HttpPostedFileBase Img)
+		public ActionResult Edit(int ID, string Name, string Type, string Description, decimal Price, HttpPostedFileBase ProductImg)
 		{
 			Product product = db.Products.Find(ID);
 
@@ -115,12 +115,12 @@ namespace MVCRazorApp.Controllers
 				product.Description = Description;
 				product.Price = Price;
 
-				if (Img != null)
+				if (ProductImg != null)
 				{
 					byte[] imgByte;
-					using (var binaryReader = new BinaryReader(Img.InputStream))
+					using (var binaryReader = new BinaryReader(ProductImg.InputStream))
 					{
-						imgByte = binaryReader.ReadBytes(Img.ContentLength);
+						imgByte = binaryReader.ReadBytes(ProductImg.ContentLength);
 					}
 					product.ProductImg = imgByte;
 
